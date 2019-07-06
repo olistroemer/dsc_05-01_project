@@ -13,7 +13,8 @@ repository.
 After we unzipped and read in the csv-file, we need to convert the date column
 into date objects.
 
-```{R}
+
+```r
 unzip("activity.zip")
 data <- read.csv("activity.csv")
 data$date <- as.Date(data$date)
@@ -21,26 +22,44 @@ data$date <- as.Date(data$date)
 
 ## Histogram of the total number of steps taken each day
 
-```{R}
+
+```r
 cumpday <- aggregate(data$steps, list(data$date), sum)
 hist(cumpday$x, main="", xlab="Number of steps/day")
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
 ## Mean and median number of steps per day
 
-```{R}
+
+```r
 mean(cumpday$x, na.rm=T)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 median(cumpday$x, na.rm=T)
 ```
 
+```
+## [1] 10765
+```
+
 ## What is the average daily activity pattern?
-```{R}
+
+```r
 meanpint <- aggregate(data$steps, list(data$interval), mean, na.rm = T)
 plot(meanpint,
      type="l",
      xlab="Interval",
      ylab="Mean number of steps across all days")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 ## Imputing missing values
 
@@ -52,7 +71,8 @@ Using the mean or the median might introduce non-integer values. A number of ste
 
 Because we already have calculated the mean steps per interval across all days and for our analysis it's not important to have integer steps, we'll use this strategy.
 
-```{R}
+
+```r
 newdata <- data
 for (x in which(is.na(data$steps))) newdata[x, "steps"] = meanpint[x, "x"]
 ```
@@ -62,33 +82,60 @@ for (x in which(is.na(data$steps))) newdata[x, "steps"] = meanpint[x, "x"]
 Let's plot an histogram of the old data over one of the new data. As we can see,
 there isn't that much of a difference.
 
-```{R}
+
+```r
 newcumpday <- aggregate(data$steps, list(data$date), sum)
 hist(newcumpday$x, xlab="", main="", col=rgb(1,0,0,.3))
 hist(cumpday$x, xlab="", main="", col=rgb(0,0,1,.3), add=T)
 title(xlab="Number of steps/day", main="")
-
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 Let's also look at the mean and median steps per day. There is a slight impact on the median, but none on the mean.
 
 * Old
-```{r}
+
+```r
 mean(cumpday$x, na.rm=T)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 median(cumpday$x, na.rm=T)
 ```
 
+```
+## [1] 10765
+```
+
 * New
-```{r}
+
+```r
 mean(newcumpday$x, na.rm=T)
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 median(newcumpday$x, na.rm=T)
+```
+
+```
+## [1] 10765
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
 The activity patterns on the weekends show fewer spikes and are overall smoother.
 
-```{r}
+
+```r
 library(lattice)
 
 # Discriminate data between weekdays and weekends
@@ -101,3 +148,5 @@ meanpintpwd <- aggregate(steps ~ wd + interval, newdata, sum)
 
 xyplot(steps ~ interval | wd, meanpintpwd, type="l", layout=c(1,2), ylab="Sum of number of steps")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
