@@ -61,6 +61,20 @@ plot(meanpint,
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
+## Which interval on average contains the maximum number of steps
+
+
+```r
+maxint <- meanpint[meanpint$x == max(meanpint$x),]
+names(maxint) <- c("Interval", "x")
+maxint
+```
+
+```
+##     Interval        x
+## 104      835 206.1698
+```
+
 ## Imputing missing values
 
 There are different strategies for imputing missing values in the data set like
@@ -99,7 +113,7 @@ hist(cumpday$x, xlab="", main="", col=rgb(0,0,1,.3), add=T)
 title(xlab="Number of steps/day", main="")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 Let's also look at the mean and median steps per day. The imputing seems to be
 no problem.
@@ -160,4 +174,4 @@ meanpintpwd <- aggregate(steps ~ wd + interval, newdata, sum)
 xyplot(steps ~ interval | wd, meanpintpwd, type="l", layout=c(1,2), ylab="Sum of number of steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->

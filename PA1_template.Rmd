@@ -42,6 +42,14 @@ plot(meanpint,
      ylab="Mean number of steps across all days")
 ```
 
+## Which interval on average contains the maximum number of steps
+
+```{r}
+maxint <- meanpint[meanpint$x == max(meanpint$x),]
+names(maxint) <- c("Interval", "x")
+maxint
+```
+
 ## Imputing missing values
 
 There are different strategies for imputing missing values in the data set like
