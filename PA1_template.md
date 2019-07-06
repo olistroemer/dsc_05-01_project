@@ -63,13 +63,22 @@ plot(meanpint,
 
 ## Imputing missing values
 
-There are different strategies for imputing missing values in the data set like filling them with the mean or average of the intervals on that given day, the interval across all days or the mean or average of that given day across all intervals. Another possibility is to use the average or the mean of the neighbouring intervals.
+There are different strategies for imputing missing values in the data set like
+filling them with the mean or average of the intervals on that given day, the
+interval across all days or the mean or average of that given day across all
+intervals. Another possibility is to use the average or the mean of the
+neighbouring intervals.
 
-The latter fails if the neighbouring intervals are missing, too. We'd have to look for the next available value in the set.
+The latter fails if the neighbouring intervals are missing, too. We'd have to
+look for the next available value in the set.
 
-Using the mean or the median might introduce non-integer values. A number of steps can only be a natural number. Rounding the value seems a little bit arbitrary.
+Using the mean or the median might introduce non-integer values. A number of
+steps can only be a natural number. Rounding the value seems a little bit
+arbitrary.
 
-Because we already have calculated the mean steps per interval across all days and for our analysis it's not important to have integer steps, we'll use this strategy.
+Because we already have calculated the mean steps per interval across all days
+and for our analysis it's not important to have integer steps, we'll use this
+strategy.
 
 
 ```r
@@ -92,7 +101,8 @@ title(xlab="Number of steps/day", main="")
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-Let's also look at the mean and median steps per day. There is a slight impact on the median, but none on the mean.
+Let's also look at the mean and median steps per day. The imputing seems to be
+no problem.
 
 * Old
 
@@ -132,7 +142,8 @@ median(newcumpday$x, na.rm=T)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The activity patterns on the weekends show fewer spikes and are overall smoother.
+The activity patterns on the weekends show fewer spikes and are overall
+smoother.
 
 
 ```r
