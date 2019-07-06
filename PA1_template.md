@@ -61,7 +61,7 @@ plot(meanpint,
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
-## Which interval on average contains the maximum number of steps
+## Which interval on average contains the maximum number of steps?
 
 
 ```r

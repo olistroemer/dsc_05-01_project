@@ -42,7 +42,7 @@ plot(meanpint,
      ylab="Mean number of steps across all days")
 ```
 
-## Which interval on average contains the maximum number of steps
+## Which interval on average contains the maximum number of steps?
 
 ```{r}
 maxint <- meanpint[meanpint$x == max(meanpint$x),]
